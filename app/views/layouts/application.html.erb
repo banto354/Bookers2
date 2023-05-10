@@ -13,7 +13,7 @@
   <body>
     <header>
         <li>
-          <%= link_to "Bookers", root_path %>
+          <a href="/">Bookers</a>
         </li>
       <% if user_signed_in? %>
         <li>
@@ -43,6 +43,9 @@
         </li>
       <% end %>
     </header>
+    
     <%= yield %>
+    
+    <footer>copy light</footer>
   </body>
 </html>
