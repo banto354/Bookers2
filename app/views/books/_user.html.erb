@@ -1,0 +1,34 @@
+<div class="col-md-3">
+    <h2>User info</h2>
+    <%= image_tag current_user.get_profile_image(100, 100) %>
+    <!--name-->
+    <table class="table">
+        <tr></tr>
+        <!--name-->
+        <tr>
+            <th class="scope">name</th>
+            <td><%= user.name %></td>                    
+        </tr>
+        <!--introduction-->
+        <tr>
+            <th><p>introduction</p></th>
+            <th><%= user.introduction %></th>
+        </tr>
+    </table>
+    <%= link_to "Edit", edit_user_path(current_user) %>
+    
+    <h2>New book</h2>
+    <%= form_with model: n_book, url: '/books', method: :post do |f| %>
+        <div class="form-group">
+            <label>Title</label>
+            <%= f.text_field :title, class:"form-control" %>
+        </div>
+         <div class="form-group">
+            <label>Opinion</label>
+            <%= f.text_area :body, class:"form-control" %>
+        </div>
+        <div class="form-group">
+            <%= f.submit 'Create Book', class:"btn btn-block btn-success" %>
+        </div>
+    <% end %>
+</div>

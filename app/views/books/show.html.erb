@@ -1,2 +1,37 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div>
+    <div class="container px-5 px-sm-0">
+        <div class="row">
+            <!--lefside-->
+            <%= render 'user', user: @user, book: @book, n_book: @n_book %>
+            <!--rightside-->
+            <div class="col-md-8 offset-md-1">
+                <h2>Book Details</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th class="scope">Title</th>
+                            <th class="scope">Opinion</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%= image_tag @book.user.get_profile_image(100, 100) %><br>
+                                <%= link_to @book.user.name, user_path(@book.user.id) %>
+                            </td>
+                            <td><%= link_to @book.title, book_path(@book.id) %></td>
+                            <td><%= @book.body %></td>
+                            <% if @book.user == current_user %>
+                                <td><%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %></td>
+                                <td><%= link_to "Destroy", book_path(@book.id), method: :delete, class:"btn btn-sm btn-danger", "data-confirm" => "Are you sure?" %></td>
+                            <% end %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>    
+        </div>
+    </div>
+</div>
