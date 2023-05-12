@@ -18,23 +18,31 @@
         </a>
         <div class="navbar ml-auto">
           <% if user_signed_in? %>
-
-            <%= link_to "Home", user_path(current_user.id), class:"nav-link text-light" %> 
-
-            <%= link_to "Users", users_path, class:"nav-link text-light" %>
-
-            <%= link_to "Books", books_path, class:"nav-link text-light" %>
-
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"nav-link text-light" %>
-
+            <a href="<%= user_path(current_user.id) %>" class="nav-link text-light">
+              <i class="fas fa-home" ></i> Home
+            </a>
+            <a href="<%= users_path %>" class="nav-link text-light">
+              <i class="fas fa-users"></i> Users
+            </a>
+            <a href="<%= books_path%>" class="nav-link text-light">  
+              <i class="fas fa-book-open"></i> Books
+            </a>
+            <a href="<%= destroy_user_session_path %>" data-method="delete" class="nav-link text-light">   
+              <i class="fas fa-sign-out-alt"></i> Log out
+            </a>
           <% else %>
-            <%= link_to "Home", root_path, class:"nav-link text-light" %>
-
-            <%= link_to "About", about_path, class:"nav-link text-light" %>
-
-            <%= link_to "Sign up", new_user_registration_path, class:"nav-link text-light" %>
-
-            <%= link_to "Log in", new_user_session_path, class:"nav-link text-light" %>
+            <a href="<%= root_path %>" class="nav-link text-light">
+              <i class="fas fa-home"></i> Home
+            </a>
+            <a href="<%= about_path %>" class="nav-link text-light">
+              <i class="fas fa-link"></i> About
+            </a>
+            <a href="<%= new_user_registration_path %>" class="nav-link text-light">
+              <i class="fas fa-user-plus"></i> Sign up
+            </a>
+            <a href="<%= new_user_session_path %>" class="nav-link text-light">
+              <i class="fas fa-sign-in-alt"></i> Log in
+            </a>
 
           <% end %>
         </div>

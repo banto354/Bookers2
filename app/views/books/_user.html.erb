@@ -15,7 +15,7 @@
             <th><%= user.introduction %></th>
         </tr>
     </table>
-    <%= link_to "Edit", edit_user_path(current_user) %>
+    <a href="<%= edit_user_path(user.id) %>" class="btn btn-block btn-light"><i class="fas fa-user-cog"></i></a>
     
     <h2>New book</h2>
     <%= form_with model: n_book, url: '/books', method: :post do |f| %>
