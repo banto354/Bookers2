@@ -1,2 +1,27 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="container col-5">
+    <h2>User info</h2>
+    <% if @user.errors.any? %>
+        <%= @user.errors.count %> errors prohibited this obj 
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    <% end %>    
+    <%= form_with model: @user do |f| %>
+        <div class="form-group">
+            <label>Name</label>
+            <%= f.text_field :name, class:"form-control" %>
+        </div>
+        <div>
+            <%= f.file_field :profile_image, accept:"image/*", class: "w-100" %>
+        </div>
+         <div class="form-group">
+            <label>Inroduction</label>
+            <%= f.text_area :introduction, class:"form-control" %>
+        </div>
+        <div class="form-group">
+            <%= f.submit 'Update User', class:"btn btn-block btn-secondary" %>
+        </div>
+    <% end %>
+</div>
