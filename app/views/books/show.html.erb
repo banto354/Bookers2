@@ -7,7 +7,6 @@
             <div class="col-md-8 offset-md-1">
                 <h2>Book detail</h2>
                 <table class="table">
-
                     <tbody>
                         <tr>
                             <td>
@@ -18,6 +17,20 @@
                             </td>
                             <td><%= link_to @book.title, book_path(@book.id) %></td>
                             <td><%= @book.body %></td>
+                            <td>
+                                <% if @book.favorited_by?(current_user) %>
+                                    <%= link_to book_favorites_path(@book.id), method: :delete do %>
+                                        ♥<%= @book.favorites.count %>
+                                    <% end %>
+                                <% else %>
+                                    <%= link_to book_favorites_path(@book.id), method: :post do %>
+                                        ♡<%= @book.favorites.count %>
+                                    <% end %>
+                                <% end %>
+                            </td>
+                            <td>
+                                <%= pluralize(@book.book_comments.count, "comment") %>
+                            </td>
                             <% if @book.user == current_user %>
                                 <td><%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %></td>
                                 <td><%= link_to "Destroy", book_path(@book.id), method: :delete, class:"btn btn-sm btn-danger", "data-confirm" => "Are you sure?" %></td>
@@ -25,6 +38,38 @@
                         </tr>
                     </tbody>
                 </table>
+                <table class="table">
+                    <tbody>
+                        <% @book_comments.each do |book_comment| %>
+                            <tr>
+                                <td>
+                                    <a href="<%= user_path(book_comment.user.id) %>">
+                                        <%= image_tag book_comment.user.get_profile_image(100, 100) %><br>
+                                        <%= book_comment.user.name %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%= book_comment.comment %>
+                                </td>
+                                <td>
+                                    <% if book_comment.user == current_user %>
+                                        <%= link_to "Destroy", book_book_comments_path(book_comment.id), method: :delete, class:"btn btn-sm btn-danger" %>
+                                    <% end %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <div class="container">
+                    <%= form_with(model: @book_book_comment, url: book_book_comments_path(@book.id)) do |form| %>
+                        <div class="form-group">
+                            <%= form.text_area :comment, class:"form-control" %>
+                        </div>
+                        <div class="form-group">
+                            <%= form.submit "submit", class:"btn btn-secondary" %>
+                        </div>
+                    <% end %>
+                </div>
             </div>    
         </div>
     </div>

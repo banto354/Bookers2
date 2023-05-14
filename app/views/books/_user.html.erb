@@ -18,7 +18,7 @@
     <a href="<%= edit_user_path(user.id) %>" class="btn btn-block btn-light"><i class="fas fa-user-cog"></i></a>
     
     <h2>New book</h2>
-    <%= form_with model: n_book, url: '/books', method: :post do |f| %>
+    <%= form_with model: n_book, url: '/books', method: :put do |f| %>
         <div class="form-group">
             <label>Title</label>
             <%= f.text_field :title, class:"form-control" %>
