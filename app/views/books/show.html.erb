@@ -61,7 +61,7 @@
                     </tbody>
                 </table>
                 <div class="container">
-                    <%= form_with(model: @book_book_comment, url: book_book_comments_path(@book.id)) do |form| %>
+                    <%= form_with(model: @book_comment, url: book_book_comments_path(@book.id)) do |form| %>
                         <div class="form-group">
                             <%= form.text_area :comment, class:"form-control" %>
                         </div>
