@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'relationships/create'
-  get 'relationships/destroy'
-  get 'book_comments/create'
-  get 'book_comments/destroy'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "homes#top"
@@ -14,5 +10,8 @@ Rails.application.routes.draw do
     resource :book_comments, only: [:create, :destroy]
   end
   
-  resources :users, only: [:show, :edit, :update, :index]
+  resources :users, only: [:show, :edit, :update, :index] do
+    resource :relationships, only: [:create, :destroy]
+  end
+  
 end
