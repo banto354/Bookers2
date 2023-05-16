@@ -28,8 +28,8 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
   
-  def followed_by(user_id)
-    ralationships.exists?(follower_id: user_id )
+  def followed_by?(user)
+    passive_relationships.exists?(follower_id: user.id )
   end
   
 end
