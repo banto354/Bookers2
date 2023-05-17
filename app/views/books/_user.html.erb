@@ -37,7 +37,7 @@
         <% if user.followed_by?(current_user) %>
             <%= link_to "unfollow", user_relationships_path(user.id), class: "btn btn-block btn-primary", method: :delete %>
         <% else %>
-            <%= link_to "Follow", user_relationships_path(user.id), class: "btn btn-block btn-primary", method: :post %>
+            <%= link_to "Follow", user_relationships_path(user.id), class: "btn btn-block btn-success", method: :post %>
         <% end %>
     <% end %>
     <h2>New book</h2>

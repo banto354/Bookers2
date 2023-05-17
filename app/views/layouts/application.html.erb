@@ -47,6 +47,18 @@
           <% end %>
         </div>
       </nav>
+      <% if user_signed_in? %>
+        <nav class="navbar navbar-light bg-light">
+            <%= form_with url: '/search', class:"form-inline my-1 mx-auto", method: :get do |f| %>
+              <%= f.text_field :query, class: "form-control mr-sm-2" %>
+              <div>
+                <%= f.select :type, options_for_select([["User", "User"], ["Book", "Book"]]), {}, class: "custom-select" %>
+                <%= f.select :type, options_for_select([["部分一致", "part"], ["完全一致", "whole"]]), {}, class: "custom-select" %>
+              </div>
+              <%= f.submit "Search", class: "btn btn-outline-success btn-sm my-2 my-sm-0" %>
+            <% end %>
+        </nav>
+      <% end %>
     </header>
     <div>
       <%= flash[:notice] %>

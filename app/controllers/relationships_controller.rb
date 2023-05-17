@@ -3,7 +3,7 @@ class RelationshipsController < ApplicationController
     relationship = Relationship.new(followed_id: params[:user_id])
     relationship.follower_id = current_user.id
     relationship.save
-    redirect_to users_path
+    redirect_to request.referer
   end
 
   def destroy
