@@ -15,7 +15,7 @@
             <!--rightside-->
             <div class="col-md-8 offset-md-1">
                 <h2>Books</h2>
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th> </th>
@@ -35,16 +35,9 @@
                             </td>
                             <td><%= link_to book.title, book_path(book.id) %></td>
                             <td><%= book.body %></td>
+                            <!--favorite button-->
                             <td>
-                                <% if book.favorited_by?(current_user) %>
-                                    <%= link_to book_favorites_path(book.id), method: :delete do %>
-                                        ♥<%= book.favorites.count %>
-                                    <% end %>
-                                <% else %>
-                                    <%= link_to book_favorites_path(book.id), method: :post do %>
-                                        ♡<%= book.favorites.count %>
-                                    <% end %>
-                                <% end %>
+                            <%= render 'favorite', book: book %>
                             </td>
                             <td><%= pluralize(book.book_comments.count, "comment") %></td>
                         </tr>
