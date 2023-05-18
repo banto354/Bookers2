@@ -5,6 +5,7 @@ class BookCommentsController < ApplicationController
     @n_book_comment.user_id = current_user.id 
     @n_book_comment.book_id = @book.id
     @n_book_comment.save
+    @n_book_comment = BookComment.new
     @book_comments = @book.book_comments
   end
 
