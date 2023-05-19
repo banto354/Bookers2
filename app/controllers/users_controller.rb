@@ -13,6 +13,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @n_book = Book.new
+    # book counter
+    today = Date.today
+    yesterday = Date.yesterday
+    this_week = (today - 6).midnight..today.end_of_day
+    last_week = (today - 13).midnight..(today - 7).end_of_day
+    @books_today = @books.where(created_at: today.midnight..today.end_of_day)
+    @books_yesterday = @books.where(created_at: yesterday.midnight..yesterday.end_of_day)
+    @books_thisw = @books.where(created_at: this_week)
+    @books_lastw = @books.where(created_at: last_week)
   end
   
   def update

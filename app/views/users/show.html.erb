@@ -26,6 +26,45 @@
                     </tbody>
                     <% end %>
                 </table>
+                <h4>投稿数の前日比/前週比</h4>
+                <!--前日比-->
+                <table class="table">
+                    <thead>
+                        <th>今日の投稿数</th>
+                        <th>前日の投稿数</th>
+                        <th>前日比</th>
+                    </thead>
+                    <tbody>
+                        <td><%= @books_today.count %></td>
+                        <td><%= @books_yesterday.count %></td>
+                        <td>
+                            <% if @books_yesterday.count != 0 %>
+                                <%= (@books_today.count / @books_yesterday.count) %>
+                            <% else %>
+                                <%= "--" %>
+                            <% end %>
+                        </td>
+                    </tbody>
+                </table>
+                <!--前週比-->
+                <table class="table">
+                    <thead>
+                        <th>今週の投稿数</th>
+                        <th>前週の投稿数</th>
+                        <th>前週比</th>
+                    </thead>
+                    <tbody>
+                        <td><%= @books_thisw.count %></td>
+                        <td><%= @books_lastw.count %></td>
+                        <td>
+                            <% if @books_lastw.count != 0 %>
+                                <%= (@books_thisw.count / @books_lastw.count) %>
+                            <% else %>
+                                <%= "--" %>
+                            <% end %>
+                        </td>
+                    </tbody>
+                </table>
             </div>    
         </div>
     </div>
