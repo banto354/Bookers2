@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @n_book = Book.new
-    
     # book counter
     today = Date.today
     @books_count = []
@@ -30,6 +29,16 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def post_date
+    @user = User.find(params[:user_id])
+    @books = @user.books
+    date = Date.parse(params[:date])
+    @books_count_date = []
+    @books_count_date.push(@books.where(created_at: date.all_day))
+    byebug
+    redirect_to request.referer
   end
   
   private
