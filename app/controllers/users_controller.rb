@@ -8,20 +8,22 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-
+  
   def show
     @user = User.find(params[:id])
     @books = @user.books
     @n_book = Book.new
+    
     # book counter
     today = Date.today
-    yesterday = Date.yesterday
-    this_week = (today - 6).midnight..today.end_of_day
-    last_week = (today - 13).midnight..(today - 7).end_of_day
-    @books_today = @books.where(created_at: today.midnight..today.end_of_day)
-    @books_yesterday = @books.where(created_at: yesterday.midnight..yesterday.end_of_day)
-    @books_thisw = @books.where(created_at: this_week)
-    @books_lastw = @books.where(created_at: last_week)
+    @books_count = []
+    for i in 0..6 do
+      if i == 6 
+        @books_count.push({count: @books.where(created_at: (today - (6-i)).midnight..(today - (6-i)).end_of_day).count, date: "今日"})
+      else
+        @books_count.push({count: @books.where(created_at: (today - (6-i)).midnight..(today - (6-i)).end_of_day).count, date: "#{6 - i}日前"})
+      end
+    end
   end
   
   def update
