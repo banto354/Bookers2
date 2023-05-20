@@ -18,11 +18,7 @@ class UsersController < ApplicationController
     today = Date.today
     @books_count = []
     for i in 0..6 do
-      if i == 6 
-        @books_count.push({count: @books.where(created_at: (today - (6-i)).midnight..(today - (6-i)).end_of_day).count, date: "今日"})
-      else
-        @books_count.push({count: @books.where(created_at: (today - (6-i)).midnight..(today - (6-i)).end_of_day).count, date: "#{6 - i}日前"})
-      end
+        @books_count.push(@books.where(created_at: (today - (6-i)).midnight..(today - (6-i)).end_of_day).count)
     end
   end
   

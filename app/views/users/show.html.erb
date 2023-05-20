@@ -26,7 +26,7 @@
                     </tbody>
                     <% end %>
                 </table>
-                <h4>投稿数の前日比/前週比</h4>
+                <h4>7日間の投稿数    </h4>
                 <!--前日比-->
                 <table class="table table-bordered">
                     <thead>
@@ -40,21 +40,38 @@
                     </thead>
                     <tbody>
                         <% @books_count.each do |book_count| %>
-                            <td><%= book_count[:count] %></td>
+                            <td><%= book_count %></td>
                         <% end %>
                     </tbody>
                 </table>
-                <!--前週比-->
-                <table class="table">
-                    <thead>
-                        <th>今週の投稿数</th>
-                        <th>前週の投稿数</th>
-                        <th>前週比</th>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
+                <!--グラフ-->
+                <canvas id="bookChart"></canvas> 
+                <script>
+                  const ctx = document.getElementById('bookChart');
+                  new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                      labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
+                      datasets: [{
+                        label: '投稿した本の数',
+                        data: <%= @books_count %>,
+                        borderColor: 'blue',
+                      }]
+                    },
+                    options: {
+                      plugins: {
+                        title: {
+                          display: true,
+                          text: '７日間の本の投稿数'
+                        }
+                      },
+                      y: {
+                        min: 0,
+                        max: 10,
+                      },
+                    },
+                  });
+                </script>
             </div>    
         </div>
     </div>
