@@ -34,11 +34,17 @@ class UsersController < ApplicationController
   def post_date
     @user = User.find(params[:user_id])
     @books = @user.books
+    @n_book = Book.new
+    # book counter
+    today = Date.today
+    @books_count = []
+    for i in 0..6 do
+        @books_count.push(@books.where(created_at: (today - (6-i)).midnight..(today - (6-i)).end_of_day).count)
+    end
     date = Date.parse(params[:date])
     @books_count_date = []
-    @books_count_date.push(@books.where(created_at: date.all_day))
-    byebug
-    redirect_to request.referer
+    @books_count_date.push(@books.where(created_at: date.midnight..date.end_of_day).count)
+    render :show
   end
   
   private
