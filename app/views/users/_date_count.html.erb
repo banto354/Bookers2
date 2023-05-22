@@ -1,6 +1,6 @@
  <h4>検索結果</h4>
 <%= form_with(url: post_date_path(user.id), method: :post, local: false) do |f| %>
-  <%= f.date_field :date %>
+  <%= f.date_field :date, value: @date %>
   <%= f.submit "検索", class:"btn btn-sm btn-success" %>
 <% end %>
 
