@@ -34,7 +34,6 @@ class UsersController < ApplicationController
   def post_date
     @user = User.find(params[:user_id])
     @books = @user.books
-    @n_book = Book.new
     # book counter
     today = Date.today
     @books_count = []
@@ -44,7 +43,6 @@ class UsersController < ApplicationController
     date = Date.parse(params[:date])
     @books_count_date = []
     @books_count_date.push(@books.where(created_at: date.midnight..date.end_of_day).count)
-    render :show
   end
   
   private

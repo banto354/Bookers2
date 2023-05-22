@@ -45,7 +45,9 @@
                     </tbody>
                 </table>
                 <!--specific date data-->
-               <%= render 'date_count', user: @user, books_count_date: @books_count_date %> 
+                <div class="date_count">
+                   <%= render 'date_count', user: @user, books_count_date: @books_count_date %> 
+                </div>
             </div>    
         </div>
     </div>
