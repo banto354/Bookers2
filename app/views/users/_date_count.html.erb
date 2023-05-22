@@ -1,0 +1,16 @@
+ <h4>検索結果</h4>
+<%= form_with (url: post_date_path(@user.id), method: :post, local: false) do |form| %>
+  <%= form.date_field :date %>
+  <%= form.submit class:"btn btn-sm btn-success" %>
+<% end %>
+
+<% if @books_count_date %>
+    <table class="table table-bordered">
+        <thead>
+            <th>投稿数</th>
+        </thead>
+        <tbody>
+            <td><%= @books_count_date[0] %></td>
+        </tbody>
+    </table>
+<% end %>

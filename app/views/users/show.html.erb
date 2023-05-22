@@ -45,21 +45,7 @@
                     </tbody>
                 </table>
                 <!--specific date data-->
-                <%= form_with url: post_date_path(@user.id), method: :post do |form| %>
-                  <%= form.date_field :date %>
-                  <%= form.submit class:"btn btn-sm btn-success" %>
-                <% end %>
-
-                <% if @books_count_date %>
-                    <table class="table">
-                        <thead>
-                            <th>投稿数</th>
-                        </thead>
-                        <tbody>
-                            <td><%= @books_count_date%></td>
-                        </tbody>
-                    </table>
-                <% end %>
+               <%= render 'date_count', user: @user, books_count_date: @books_count_date %> 
             </div>    
         </div>
     </div>
