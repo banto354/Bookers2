@@ -18,4 +18,8 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
   end
   
+  devise_scope :user do
+    post 'user/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+  
 end
