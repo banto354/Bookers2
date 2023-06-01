@@ -13,7 +13,8 @@ class BooksController < ApplicationController
 
   def index
     @user = User.find(current_user.id)
-    @books = Book.all
+    today = Date.today
+    @books = Book.joins(:favorites).where(favorites: {created_at: ((today - 6).midnight...today.end_of_day)}).group(:id).order('COUNT(favorites.id) DESC').all
     @book = Book.new
     @n_book = Book.new
   end
