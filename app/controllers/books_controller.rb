@@ -13,8 +13,11 @@ class BooksController < ApplicationController
 
   def index
     @user = User.find(current_user.id)
-    today = Date.today
-    @books = Book.joins(:favorites).where(favorites: {created_at: ((today - 6).midnight...today.end_of_day)}).group(:id).order('COUNT(favorites.id) DESC').all
+    # @books = Book.left_joins(:favorites).group(:id).order(Arel.sql('COUNT(favorites.book_id) DESC')).all
+    # @books = Book.left_joins(:favorites).group(:id).order(Arel.sql('COUNT(favorites.book_id) WHERE created_at >= 2023-05-21 DESC'))
+    subquery = Favorite.where('created_at >= ?', 7.days.ago).group(:book_id).select('book_id, COUNT(*) AS favo_count')
+    # サブクエリをbooksテーブルと結合して、カウント数で降順に並べ替える
+    @books = Book.joins("LEFT JOIN (#{subquery.to_sql}) AS favorites ON books.id = favorites.book_id").order(Arel.sql('favo_count DESC NULLS LAST'))
     @book = Book.new
     @n_book = Book.new
   end
