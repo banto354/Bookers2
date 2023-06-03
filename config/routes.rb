@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:show, :edit, :update, :index] do
     resource :relationships, only: [:create, :destroy]
+    resource :direct_message, only: [:create]
   end
   
   devise_scope :user do

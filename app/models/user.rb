@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   
+  has_many :sent_messages, dependent: :destroy, Class_name: "DirectMessage", foreign_key: ":sender_id"
+  has_many :received_messages, dependent: :destroy, Class_name: "DirectMessage", foreign_key: "receiver"
+  
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
   
