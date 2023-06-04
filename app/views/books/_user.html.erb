@@ -38,7 +38,22 @@
             <a href="<%= edit_user_path(user.id) %>" class="btn btn-block btn-light"><i class="fas fa-user-cog"></i></a>
         <% else %>
             <% if user.followed_by?(current_user) %>
-                <%= link_to "unfollow", user_relationships_path(user.id), class: "btn btn-block btn-primary", method: :delete %>
+                <table class="table">
+                    <thead>
+                        <tr>                        </tr>
+                        <tr></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%= link_to "unfollow", user_relationships_path(user.id), class: "btn btn-block btn-primary", method: :delete %>
+                            </td>
+                            <td>
+                                <%= link_to "chatをはじめる", message_path(user.id) %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             <% else %>
                 <%= link_to "Follow", user_relationships_path(user.id), class: "btn btn-block btn-success", method: :post %>
             <% end %>
