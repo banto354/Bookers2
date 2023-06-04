@@ -35,6 +35,7 @@ class User < ApplicationRecord
     passive_relationships.exists?(follower_id: user.id )
   end
   
+  
   def self.guest
     find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64

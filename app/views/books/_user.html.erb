@@ -44,7 +44,9 @@
                             <%= link_to "unfollow", user_relationships_path(user.id), class: "btn btn-block btn-primary", method: :delete %>
                         </td>
                         <td>
-                            <%= link_to "chatをはじめる", message_path(user.id) %>
+                            <% if current_user.followed_by?(user) %>
+                                <%= link_to "chatをはじめる", message_path(user.id) %>
+                            <% end %>
                         </td>
                     </tr>
                 </table>

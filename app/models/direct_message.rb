@@ -3,4 +3,5 @@ class DirectMessage < ApplicationRecord
     belongs_to :receiver, class_name: "User" 
     
     validates :comment, presence: true, length: { maximum: 140 }
+    
 end
