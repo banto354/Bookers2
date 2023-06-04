@@ -1,1 +1,19 @@
-<h1>test</h1>
+<div class="col-md-8 offset-md-1">
+    <h2><%= "#{@receiver.name}とのチャット" %></h2>
+    <table class="table">
+        <% @messages.each do |message| %>
+            <tr>
+                <td><%= message.comment %></td>
+                <td></td>
+            </tr>
+        <% end %>
+        <tr>
+            <td>
+                <%= form_with model: @message, url: "/users/#{@receiver.id}/direct_message", method: :post do |f| %>
+                    <%= f.text_field :comment, class: "form-control" %>
+                <% end %>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</div>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'relationships/:user_id/followers' => 'relationships#followers', as: 'followers'
   get 'relationships/:user_id/following' => 'relationships#following', as: 'following'
   get 'searches/search' => 'searches#search', as: 'search'
-  post 'users/:user_id/post_date' => 'users#post_date', as: 'post_date'
+  post 'users/:user_id/post_date' => 'users#post_date', as: 'post_date' 
   get 'direct_messages/:user_id/message' => 'direct_messages#message', as: 'message'
 
   resources :books, only: [:new, :index, :show, :create, :destroy, :edit, :update] do

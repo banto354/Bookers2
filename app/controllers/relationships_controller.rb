@@ -7,7 +7,6 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
-    #user = User.find(followed_id: params[:user_id])
     relationship = Relationship.find_by(follower_id: current_user.id, followed_id: params[:user_id])
     relationship.destroy if relationship
     redirect_to request.referer
