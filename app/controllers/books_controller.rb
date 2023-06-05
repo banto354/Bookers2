@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
   def show
+    view_count = ViewCount.new(user_id: current_user.id, book_id: params[:id])
+    view_count.save
     @book = Book.find(params[:id])
     @user = @book.user
     @n_book = Book.new
