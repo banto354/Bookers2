@@ -24,12 +24,14 @@
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                     <% @books.each do |book| %>
                         <tr>
                             <%= render 'detail', book: book %>
+                            <td><%= pluralize(book.view_counts.group(:user_id).count.size, "view") %></td>
                         </tr>
                     </tbody>
                     <% end %>
