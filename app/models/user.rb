@@ -21,6 +21,8 @@ class User < ApplicationRecord
   has_many :received_messages, dependent: :destroy, class_name: "DirectMessage", foreign_key: "receiver_id"
   has_many :view_counts
   
+  has_many :group_users, dependent: :destroy
+  
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
   
