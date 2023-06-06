@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     resource :direct_message, only: [:create]
   end
   
+  resources :groups, only: [:new, :show, :index, :create, :edit, :destroy, :update] do
+    resource :group_users, only: [:create, :destroy]
+  end
   devise_scope :user do
     post 'user/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
