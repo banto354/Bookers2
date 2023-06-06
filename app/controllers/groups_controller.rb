@@ -4,6 +4,10 @@ class GroupsController < ApplicationController
   end
   
   def show
+    @group = Group.find(params[:id])
+    @user = User.find(current_user.id)
+    @n_book = Book.new
+    
   end
 
   def index

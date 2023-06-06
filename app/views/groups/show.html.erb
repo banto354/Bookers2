@@ -1,2 +1,44 @@
-<h1>Groups#show</h1>
-<p>Find me in app/views/groups/show.html.erb</p>
+<div>
+    <div class="container px-5 px-sm-0">
+        <div class="row">
+            <!--lefside-->
+            <%= render 'books/user', user: @user, n_book: @n_book %>
+            <!--rightside-->
+            <div class="col-md-8 offset-md-1">
+                <h2>Group Detail</h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <a href="<%= group_path(@group.id) %>">
+                                <%= image_tag @group.get_group_image(100, 100) %><br>
+                                </a>
+                            </th>
+                            <td><%= @group.name %></td>
+                            <td><%= @group.introduction %></td>
+                            <td></td>
+                            <% if @group.owner_id == current_user.id %>
+                                <td>
+                                    <%= link_to "Edit", edit_group_path(@group.id), class:"btn btn-sm btn-success" %>
+                                </td>
+                                <td>
+                                    <%= link_to "Destroy", group_path(@group.id), method: :delete, class:"btn btn-sm btn-danger", "data-confirm" => "Are you sure?" %>
+                                </td>
+                            <% end %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>    
+        </div>
+    </div>
+</div>
