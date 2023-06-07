@@ -11,4 +11,7 @@ class Group < ApplicationRecord
         group_image.variant(resize_to_limit: [width, height]).processed
     end
     
+    def is_group_user(group_id, user_id)
+        Group_user.where(group_id: group_id, user_id: user_id).exists?
+    end
 end
