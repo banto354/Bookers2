@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
   
   def index
-    @user = User.find(current_user.id)
     @users = User.all
     @n_book = Book.new
   end

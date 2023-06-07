@@ -14,7 +14,6 @@ class BooksController < ApplicationController
   end
 
   def index
-    @user = User.find(current_user.id)
     subquery = Favorite.where('created_at >= ?', 7.days.ago).group(:book_id).select('book_id, COUNT(*) AS favo_count')
     @books = Book.joins("LEFT JOIN (#{subquery.to_sql}) AS favorites ON books.id = favorites.book_id").order(Arel.sql('favo_count DESC NULLS LAST'))
     @book = Book.new
@@ -28,7 +27,6 @@ class BooksController < ApplicationController
       flash[:notice] = "successfully posted!"
       redirect_to book_path(@book.id)
     else
-      @user = User.find(current_user.id)
       @books = Book.all
       @n_book = Book.new
       render :index

@@ -2,7 +2,7 @@
     <div class="container px-5 px-sm-0">
         <div class="row">
             <!--lefside-->
-            <%= render 'books/user', user: @user, n_book: @n_book %>
+            <%= render 'books/user', user: current_user, n_book: @n_book %>
             <!--rightside-->
             <div class="col-md-8 offset-md-1">
                 <h2>Users</h2>
