@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   
   def show
     @group = Group.find(params[:id])
-    @group_users = GroupUser.all
+    @group_users = GroupUser.where(group_id: params[:id])
   end
 
   def index

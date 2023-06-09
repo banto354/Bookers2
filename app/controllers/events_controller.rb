@@ -6,8 +6,15 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.group_id = params[:group_id]
-    @event.save
-    render :show
+    @group_users = GroupUser.where(group_id: params[:group_id])
+    
+    if @event.save
+     EventMailer.event_mail(@event, @group_users).deliver
+     render :show
+    else
+      render :new
+    end
+    
   end
   
   def show
