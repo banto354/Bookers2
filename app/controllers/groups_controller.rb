@@ -8,8 +8,6 @@ class GroupsController < ApplicationController
   
   def show
     @group = Group.find(params[:id])
-    @user = User.find(current_user.id)
-    @n_book = Book.new
     @group_users = GroupUser.all
   end
 
@@ -22,7 +20,6 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
     if @group.save
-      @user = User.find(current_user.id)
       group_user = GroupUser.new(group_id: @group.id, user_id: current_user.id)
       group_user.save
       redirect_to groups_path
@@ -44,13 +41,6 @@ class GroupsController < ApplicationController
       render :edit
     end
   end
-  
-  def destroy
-    group = Group.find(params[:id])
-    group.destroy
-    redirect_to '/groups'
-  end
-  private
   
   def group_params
     params.require(:group).permit(:name,:introduction)

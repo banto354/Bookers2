@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'events/new'
+  get 'events/show'
+  get 'new/show'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "homes#top"
@@ -17,12 +20,14 @@ Rails.application.routes.draw do
   
   resources :users, only: [:show, :edit, :update, :index] do
     resource :relationships, only: [:create, :destroy]
-    resource :direct_message, only: [:create]
+    resource :direct_messages, only: [:create]
   end
   
   resources :groups, only: [:new, :show, :index, :create, :edit, :destroy, :update] do
     resource :group_users, only: [:create, :destroy]
+    resource :events, only: [:new, :create, :show]
   end
+  
   devise_scope :user do
     post 'user/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end

@@ -2,7 +2,7 @@
     <div class="container px-5 px-sm-0">
         <div class="row">
             <!--lefside-->
-            <%= render 'books/user', user: @user, n_book: @n_book %>
+            <%= render 'books/user', user: current_user, n_book: Book.new %>
             <!--rightside-->
             <div class="col-md-8 offset-md-1">
                 <h2>Group Detail</h2>
@@ -37,7 +37,7 @@
                                     <%= link_to "Edit", edit_group_path(@group.id), class:"btn btn-sm btn-success" %>
                                 </td>
                                 <td>
-                                    <%= link_to "Destroy", group_path(@group.id), method: :delete, class:"btn btn-sm btn-danger", "data-confirm" => "Are you sure?" %>
+                                    <%= link_to "Notice an Event", new_group_events_path(@group.id), class:"btn btn-sm btn-secondary"%>
                                 </td>
                             <% else %>
                                 <td>
