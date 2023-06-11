@@ -3,13 +3,13 @@ class RelationshipsController < ApplicationController
     relationship = Relationship.new(followed_id: params[:user_id])
     relationship.follower_id = current_user.id
     relationship.save
-    redirect_to request.referer
+    @user = User.find(params[:user_id])
   end
 
   def destroy
     relationship = Relationship.find_by(follower_id: current_user.id, followed_id: params[:user_id])
     relationship.destroy if relationship
-    redirect_to request.referer
+    @user = User.find(params[:user_id])
   end
   
   def followers
